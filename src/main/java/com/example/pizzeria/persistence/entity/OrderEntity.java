@@ -26,13 +26,13 @@ public class OrderEntity {
     @Column(name = "id_customer", nullable = false, length = 15)
     private String idCustomer;
 
-    @Column(nullable = false, columnDefinition = "timestamp")
+    @Column(nullable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime date;
 
-    @Column(nullable = false, columnDefinition = "decimal(6,2)")
+    @Column(nullable = false, columnDefinition = "DECIMAL(6,2)")
     private Double total;
 
-    @Column(nullable = false, columnDefinition = "char(1)")
+    @Column(nullable = false, columnDefinition = "CHAR(1)")
     private String method;
 
     @Column(name = "additional_notes", length = 200)

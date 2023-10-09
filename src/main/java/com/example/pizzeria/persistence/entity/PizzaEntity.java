@@ -27,15 +27,15 @@ public class PizzaEntity {
     @Column(nullable = false, length = 150)
     private String description;
 
-    @Column(nullable = false, columnDefinition = "Decimal(5,2)")
+    @Column(nullable = false, columnDefinition = "DECIMAL(5,2)")
     private Double price;
 
-    @Column(columnDefinition = "smallint")
+    @Column(columnDefinition = "SMALLINT")
     private boolean vegetarian;
 
-    @Column(columnDefinition = "smallint")
+    @Column(columnDefinition = "SMALLINT")
     private boolean vegan;
 
-    @Column(columnDefinition = "smallint", nullable = false)
+    @Column(columnDefinition = "SMALLINT", nullable = false)
     private boolean available;
 }
