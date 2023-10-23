@@ -4,6 +4,7 @@ import com.example.pizzeria.persistence.entity.PizzaEntity;
 import com.example.pizzeria.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,5 +49,11 @@ public class PizzaController {
             return ResponseEntity.ok(this.pizzaService.save(pizza));
         }
         return ResponseEntity.badRequest().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> delete(@PathVariable int id) {
+        return this.pizzaService.delete(id) ?
+                ResponseEntity.ok(true) : ResponseEntity.notFound().build();
     }
 }

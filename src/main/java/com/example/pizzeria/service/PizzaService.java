@@ -33,4 +33,12 @@ public class PizzaService {
     public boolean exists(int id) {
         return pizzaRepository.existsById(id);
     }
+
+    public boolean delete(int id) {
+        if (exists(id)) {
+            pizzaRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }
