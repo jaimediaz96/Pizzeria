@@ -1,6 +1,7 @@
 package com.example.pizzeria.persistence.entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,11 +32,14 @@ public class PizzaEntity {
     private Double price;
 
     @Column(columnDefinition = "SMALLINT")
+    @Convert(converter = BooleanToSmallintConverter.class)
     private boolean vegetarian;
 
     @Column(columnDefinition = "SMALLINT")
+    @Convert(converter = BooleanToSmallintConverter.class)
     private boolean vegan;
 
     @Column(columnDefinition = "SMALLINT", nullable = false)
+    @Convert(converter = BooleanToSmallintConverter.class)
     private boolean available;
 }
