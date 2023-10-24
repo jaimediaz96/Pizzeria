@@ -26,19 +26,37 @@ public class PizzaService {
         return pizzaRepository.findById(id).orElse(null);
     }
 
-    public PizzaEntity save(PizzaEntity pizza) {
-        return pizzaRepository.save(pizza);
+    public List<PizzaEntity> getAvailable() {
+        System.out.println(this.pizzaRepository.countByVeganTrue());
+        return this.pizzaRepository.findAllByAvailableTrueOrderByPrice();
     }
 
-    public boolean exists(int id) {
-        return pizzaRepository.existsById(id);
+    public PizzaEntity getByName(String name) {
+        return this.pizzaRepository.findByAvailableTrueAndNameIgnoreCase(name);
     }
+
+    public List<PizzaEntity> getWith(String ingredient) {
+        return this.pizzaRepository.findAllByAvailableTrueAndDescriptionContainingIgnoreCase(ingredient);
+    }
+
+    public List<PizzaEntity> getWithout(String ingredient) {
+        return this.pizzaRepository.findAllByAvailableTrueAndDescriptionNotContainingIgnoreCase(ingredient);
+    }
+
+    public PizzaEntity save(PizzaEntity pizza) {
+        return this.pizzaRepository.save(pizza);
+    }
+
 
     public boolean delete(int id) {
         if (exists(id)) {
-            pizzaRepository.deleteById(id);
+            this.pizzaRepository.deleteById(id);
             return true;
         }
         return false;
+    }
+
+    public boolean exists(int id) {
+        return this.pizzaRepository.existsById(id);
     }
 }
