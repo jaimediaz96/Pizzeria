@@ -3,12 +3,15 @@ package com.example.pizzeria.service;
 import com.example.pizzeria.persistence.entity.PizzaEntity;
 import com.example.pizzeria.persistence.repository.PizzaPagSortRepository;
 import com.example.pizzeria.persistence.repository.PizzaRepository;
+import com.example.pizzeria.service.dto.UpdatePizzaPriceDto;
+import com.example.pizzeria.service.exception.EmailApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -66,6 +69,16 @@ public class PizzaService {
             return true;
         }
         return false;
+    }
+
+    @Transactional(noRollbackFor = EmailApiException.class) // @Transactional guarantees the principles ACID
+    public void updatePrice(UpdatePizzaPriceDto dto) {
+        this.pizzaRepository.updatePrice(dto);
+        this.sendEmail();
+    }
+
+    public void sendEmail() {
+        throw new EmailApiException();
     }
 
     public boolean exists(int id) {
